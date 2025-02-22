@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, request
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
@@ -38,10 +37,15 @@ def subcategories(category_id: str):
     return subcategories
 
 
-@app.route("/get_issues/<string:subcat_id>")
-def skills(subcat_id: str):
-    response = dict(supabase.rpc("search_skills", {"p_query": '', "p_subcat": subcat_id}).execute())
+@app.route("/get_issues")
+def skills():
+    skill_id = request.args.get("p_subcat", default="all")
+    p_query = request.args.get("p_query", default='')
     issues = []
+    if skill_id != "all":
+        response = dict(supabase.rpc("search_skills", {"p_query": p_query, "p_subcat": skill_id}).execute())
+    else:
+        response = dict(supabase.table("skill").select("id", "name").execute())
     for issue in response["data"]:
         issues.append((issue["id"], issue["name"]))
     return issues
