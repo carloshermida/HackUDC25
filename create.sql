@@ -1,46 +1,8 @@
--- Crear la tabla category
 CREATE TABLE category (
     id BIGINT PRIMARY KEY,
     name VARCHAR
 );
 
--- Crear la tabla subCategory
-CREATE TABLE subCategory (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR,
-    category_id BIGINT REFERENCES category(id)
-);
-
--- Crear la tabla skill
-CREATE TABLE skill (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR
-);
-
--- Crear la tabla language
-CREATE TABLE language (
-    id BIGINT PRIMARY KEY,
-    name TEXT
-);
-
--- Crear la tabla office
-CREATE TABLE office (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR,
-    location VARCHAR
-);
-
--- Crear la tabla employee
-CREATE TABLE employee (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR,
-    email VARCHAR,
-    phone VARCHAR,
-    job_title VARCHAR,
-    office_id BIGINT REFERENCES office(id)
-);
-
--- Crear la tabla course
 CREATE TABLE course (
     id BIGINT PRIMARY KEY,
     name VARCHAR,
@@ -49,57 +11,92 @@ CREATE TABLE course (
     valuable BOOLEAN
 );
 
--- Crear la tabla project
-CREATE TABLE project (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR,
-    description TEXT,
-    url TEXT,
-    type VARCHAR,
-    open_source BOOLEAN,
-    start_date DATE,
-    end_date DATE
-);
-
--- Crear la tabla issue
-CREATE TABLE issue (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR,
-    description TEXT,
-    documentation TEXT,
-    subcategory_id BIGINT REFERENCES subCategory(id)
-);
-
--- Tablas intermedias para relaciones muchos a muchos
 CREATE TABLE courseSkill (
-    course_id BIGINT REFERENCES course(id),
-    skill_id BIGINT REFERENCES skill(id),
+    course_id BIGINT,
+    skill_id BIGINT,
+    FOREIGN KEY (course_id) REFERENCES course(id),
+    FOREIGN KEY (skill_id) REFERENCES skill(id),
     PRIMARY KEY (course_id, skill_id)
 );
 
+CREATE TABLE employee (
+    id BIGINT PRIMARY KEY,
+    email VARCHAR,
+    job_title VARCHAR,
+    name VARCHAR,
+    office_id BIGINT,
+    phone VARCHAR,
+    FOREIGN KEY (office_id) REFERENCES office(id)
+);
+
 CREATE TABLE employeeCourse (
-    employee_id BIGINT REFERENCES employee(id),
-    course_id BIGINT REFERENCES course(id),
+    course_id BIGINT,
+    employee_id BIGINT,
     start_date DATE,
     end_date DATE,
-    PRIMARY KEY (employee_id, course_id)
+    FOREIGN KEY (course_id) REFERENCES course(id),
+    FOREIGN KEY (employee_id) REFERENCES employee(id),
+    PRIMARY KEY (course_id, employee_id)
 );
 
 CREATE TABLE employeeLanguage (
-    employee_id BIGINT REFERENCES employee(id),
-    language_id BIGINT REFERENCES language(id),
+    employee_id BIGINT,
+    language_id BIGINT,
+    FOREIGN KEY (employee_id) REFERENCES employee(id),
+    FOREIGN KEY (language_id) REFERENCES language(id),
     PRIMARY KEY (employee_id, language_id)
 );
 
 CREATE TABLE employeeProjectSkill (
-    employee_id BIGINT REFERENCES employee(id),
-    project_id BIGINT REFERENCES project(id),
-    skill_id BIGINT REFERENCES skill(id),
+    employee_id BIGINT,
+    project_id BIGINT,
+    skill_id BIGINT,
+    FOREIGN KEY (employee_id) REFERENCES employee(id),
+    FOREIGN KEY (project_id) REFERENCES project(id),
+    FOREIGN KEY (skill_id) REFERENCES skill(id),
     PRIMARY KEY (employee_id, project_id, skill_id)
 );
 
-CREATE TABLE issueSkill (
-    issue_id BIGINT REFERENCES issue(id),
-    skill_id BIGINT REFERENCES skill(id),
-    PRIMARY KEY (issue_id, skill_id)
+CREATE TABLE language (
+    id BIGINT PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE office (
+    id BIGINT PRIMARY KEY,
+    location VARCHAR,
+    name VARCHAR
+);
+
+CREATE TABLE project (
+    id BIGINT PRIMARY KEY,
+    description TEXT,
+    end_date DATE,
+    name VARCHAR,
+    open_source BOOLEAN,
+    start_date DATE,
+    type VARCHAR,
+    url TEXT
+);
+
+CREATE TABLE skill (
+    id BIGINT PRIMARY KEY,
+    description TEXT,
+    documentation TEXT,
+    name VARCHAR
+);
+
+CREATE TABLE skillSubcategory (
+    skill_id BIGINT,
+    subcategory_id BIGINT,
+    FOREIGN KEY (skill_id) REFERENCES skill(id),
+    FOREIGN KEY (subcategory_id) REFERENCES subCategory(id),
+    PRIMARY KEY (skill_id, subcategory_id)
+);
+
+CREATE TABLE subCategory (
+    id BIGINT PRIMARY KEY,
+    category_id BIGINT,
+    name VARCHAR,
+    FOREIGN KEY (category_id) REFERENCES category(id)
 );

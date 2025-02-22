@@ -12,9 +12,12 @@ key: str = os.environ.get("SUPABASE_KEY")
 # Crear el cliente de Supabase
 supabase: Client = create_client(url, key)
 
+
+
+
 # Realizar una consulta
 response = (
-    supabase.table("planets")
+    supabase.table("us")
     .select("*")
     .execute()
 )
