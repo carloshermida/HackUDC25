@@ -1,130 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Gradiant - Best professional</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="../static/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: eStartup
-  * Template URL: https://bootstrapmade.com/estartup-bootstrap-landing-page-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skills Explorer</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/main.css">
+    
 </head>
+<body>
 
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="../static/img/logo.jpeg" alt="">
-        <h1 style="font-weight: 700;">Busca a tu profesional cualificado</h1>
+  <!-- HEADER -->
+  <header class="py-3 sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="d-flex align-items-center text-decoration-none">
+        <img src="../static/img/logo.jpeg" alt="Logo" class="logo me-2">
+        <span class="h5 m-0">Skills Explorer</span>
       </a>
-
+      <div class="flex-grow-1 mx-3 search-bar">
+        <input type="search" id="searchInput" class="form-control" placeholder="Buscar skills...">
+      </div>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Consultoría</a></li>
+              <li><a class="dropdown-item" href="#">Desarrollo</a></li>
+              <li><a class="dropdown-item" href="#">Marketing</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Acerca de</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Quiénes somos</a></li>
+              <li><a class="dropdown-item" href="#">Contacto</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-<!--Seleccionar categoria y subcategoria-->
-  <section id="hero" class="hero section light-background">
-    <label for="categorycb">Categoria</label>
-      <select id="categorycb" name="categorycb">
-        <option value="" selected></option>
-      {%for cat in categories%}  
-        <option value="{{cat[0]}}">{{cat[1]}}</option>
-      {%endfor%}
-      </select>
-
-
-      <label for="subcatcb">Especialidad</label>
-      <select id="subcatcb" name="subcatcb">
-        <option value = '' selected></option>
-      </select>
-
-
-      <div id = "skills_container" style="margin-left: 300px;">
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container mt-5 pt-5">
+    <!-- Filtros: Categoría y Especialidad -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="categorycb" class="form-label">Categoría</label>
+        <select id="categorycb" class="form-select">
+          <option value="" selected>Seleccione categoría</option>
+          {% for cat in categories %}
+            <option value="{{cat[0]}}">{{cat[1]}}</option>
+          {% endfor %}
+        </select>
       </div>
-      
-    
-   </section>
+      <div class="col-md-6">
+        <label for="subcatcb" class="form-label">Especialidad</label>
+        <select id="subcatcb" class="form-select">
+          <option value="" selected>Seleccione especialidad</option>
+        </select>
+      </div>
+    </div>
 
-   <script>
-    // Capturamos el evento de cambio en el primer combobox
+    <!-- Contenedor de Cards de Skills -->
+    <div id="skills_container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <!-- Aquí se inyectarán dinámicamente las cards de skills -->
+    </div>
+  </main>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script para funcionalidad -->
+  <script>
+    // Actualizar especialidades según la categoría seleccionada
     document.getElementById('categorycb').addEventListener('change', function() {
-        const categoryId = this.value;  // Obtener el ID de la categoría seleccionada
-        
-        if (categoryId) {
-            // Hacer la solicitud al backend para obtener las subcategorías
-            fetch(`/get_subcategories/${categoryId}`)
-                .then(response => response.json())
-                .then(subcategories => {
-                    // Limpiar las opciones del segundo combobox
-                    const subcatComboBox = document.getElementById('subcatcb');
-                    subcatComboBox.innerHTML = ''
-                    // Agregar las nuevas opciones de subcategorías
-                    subcategories.forEach(subcat => {
-                        const optionElement = document.createElement('option');
-                        optionElement.value = subcat[0];  // ID de la subcategoría
-                        optionElement.textContent = subcat[1];  // Nombre de la subcategoría
-                        subcatComboBox.appendChild(optionElement);
-                    });
-                })
-                
-                
-        } else {
-            // Limpiar el segundo combobox si no se seleccionó categoría
-            document.getElementById('subcatcb').innerHTML = '';
-        }
+      const categoryId = this.value;
+      const subcatComboBox = document.getElementById('subcatcb');
+      if (categoryId) {
+        fetch(`/get_subcategories/${categoryId}`)
+          .then(response => response.json())
+          .then(subcategories => {
+            subcatComboBox.innerHTML = '<option value="" selected>Seleccione especialidad</option>';
+            subcategories.forEach(subcat => {
+              const optionElement = document.createElement('option');
+              optionElement.value = subcat[0];
+              optionElement.textContent = subcat[1];
+              subcatComboBox.appendChild(optionElement);
+            });
+          });
+      } else {
+        subcatComboBox.innerHTML = '<option value="" selected>Seleccione especialidad</option>';
+      }
     });
 
+    // Cargar skills en forma de cards al seleccionar una especialidad
     document.getElementById("subcatcb").addEventListener('change', function() {
-      const subcatId = this.value // Id de la subcategoria
-      if (subcatId){
-        const container = document.getElementById("skills_container");
-        container.innerHTML = ''
-        const url = `/get_issues/${subcatId}`
-        fetch(url).
-        then(response => response.json()).
-        then(skills => {
-          const n_buttons = skills.length
-          skills.forEach(skill => {
-          const button = document.createElement("button");
-          button.textContent = skill[1];  
-          button.setAttribute("id", `btn btn-primary`); 
-          button.setAttribute("style", `width: 300px;height: 100px; margin-top:100px; margin-left: 100px;`); 
-          container.appendChild(button);
-          // button.addEventListener("click", () => {
-            // console.log(`Botón ${item.id} presionado: ${item.nombre}`);
-        });
+      const subcatId = this.value;
+      const container = document.getElementById("skills_container");
+      if (subcatId) {
+        container.innerHTML = '';
+        fetch(`/get_issues/${subcatId}`)
+          .then(response => response.json())
+          .then(skills => {
+            skills.forEach(skill => {
+              // Crear card usando clases de Bootstrap
+              const col = document.createElement("div");
+              col.className = "col";
+              const card = document.createElement("div");
+              card.className = "card h-100";
+              const cardBody = document.createElement("div");
+              cardBody.className = "card-body d-flex align-items-center justify-content-center";
+              const title = document.createElement("h5");
+              title.className = "card-title text-center";
+              title.textContent = skill[1];
+              cardBody.appendChild(title);
+              card.appendChild(cardBody);
+              col.appendChild(card);
+              container.appendChild(col);
+            });
+          });
+      }
+    });
+
+    // Filtro de búsqueda en las cards
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const filter = this.value.toLowerCase();
+      document.querySelectorAll('#skills_container .card').forEach(card => {
+        card.parentElement.style.display = card.textContent.toLowerCase().includes(filter) ? '' : 'none';
       });
-}});
-</script>
-
-  <!-- Main JS File -->
-  <script src="../static/js/main.js"></script>
-
+    });
+  </script>
 </body>
 </html>
