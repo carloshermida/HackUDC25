@@ -1,7 +1,5 @@
-import json
 from flask import Flask
 from flask import render_template
-from datetime import datetime
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
@@ -22,6 +20,9 @@ supabase: Client = create_client(url, key)
 
 @app.route("/")
 def home():
+    """
+    Main menu
+    """
     response = dict(supabase.rpc("get_categories").execute())
     categories = []
     for data in response["data"]:
@@ -29,12 +30,21 @@ def home():
     return render_template("index.html", categories = categories)
 
 @app.route("/get_subcategories/<string:category_id>")
-def subcategories(category_id:str):   
+def subcategories(category_id: str):   
     response = dict(supabase.rpc("get_subcategories", {"p_category_id": category_id}).execute())
     subcategories = []
     for subcat in response["data"]:
-        subcategories.append((subcat["id"],subcat["name"]))
+        subcategories.append((subcat["id"],subcat["name"].title()))
     return subcategories
+
+
+@app.route("/get_issues/<string:subcat_id>")
+def skills(subcat_id: str):
+    response = dict(supabase.rpc("search_skills", {"p_subcat": subcat_id}))
+    issues = []
+    for issue in response["data"]:
+        issues.append((issue["id"], issue["name"]))
+    return [f"skill_{i}" for i in range(3)]
 
 @app.route("/contact/")
 def contact():

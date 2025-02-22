@@ -52,44 +52,76 @@
   <section id="hero" class="hero section light-background">
     <label for="categorycb">Categoria</label>
       <select id="categorycb" name="categorycb">
-        <option value='' selected></option>
+        <option value="" selected></option>
       {%for cat in categories%}  
         <option value="{{cat[0]}}">{{cat[1]}}</option>
       {%endfor%}
       </select>
 
+
       <label for="subcatcb">Especialidad</label>
       <select id="subcatcb" name="subcatcb">
         <option value = '' selected></option>
       </select>
+
+
+      <div id = "skills_container" style="margin-left: 300px;">
+      </div>
+      
     
    </section>
 
    <script>
-   document.getElementById("categorycb").addEventListener("change", function() {
-    // Obtener el id de la categoria
-    var category_id = this.value;
-    if (category_id != ""){
-      const url = `/get_subcategories/${category_id}`
-      fetch(url).
-      then(response => reponse.json()).
-      then(options => {
-          const comboBox = document.getElementById('subcatcb');
-          // Limpiar las opciones actuales
-          comboBox.innerHTML = '';          
-          // Crear las opciones dinámicamente
-          options.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option[0];
-            optionElement.textContent = option[1];
-            comboBox.appendChild(optionElement);
-          });
-          // // Mostrar combobox de subcategoria
-          // const div_comboBox = document.getElementById('comboboxSubCategory');
-          // div_comboBox.style.display = "block"
-        });
-      };
+    // Capturamos el evento de cambio en el primer combobox
+    document.getElementById('categorycb').addEventListener('change', function() {
+        const categoryId = this.value;  // Obtener el ID de la categoría seleccionada
+        
+        if (categoryId) {
+            // Hacer la solicitud al backend para obtener las subcategorías
+            fetch(`/get_subcategories/${categoryId}`)
+                .then(response => response.json())
+                .then(subcategories => {
+                    // Limpiar las opciones del segundo combobox
+                    const subcatComboBox = document.getElementById('subcatcb');
+                    subcatComboBox.innerHTML = ''
+                    // subcatComboBox.innerHTML = '<option value="" selected>Seleccione una especialidad</option>';
+
+                    // Agregar las nuevas opciones de subcategorías
+                    subcategories.forEach(subcat => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = subcat[0];  // ID de la subcategoría
+                        optionElement.textContent = subcat[1];  // Nombre de la subcategoría
+                        subcatComboBox.appendChild(optionElement);
+                    });
+                })
+                
+                
+        } else {
+            // Limpiar el segundo combobox si no se seleccionó categoría
+            document.getElementById('subcatcb').innerHTML = '';
+        }
     });
+
+    document.getElementById("subcatcb").addEventListener('change', function() {
+      const subcatId = this.value // Id de la subcategoria
+      if (subcatId){
+        const container = document.getElementById("skills_container");
+        const url = `/get_issues`
+        fetch(url).
+        then(response => response.json()).
+        then(skills => {
+          const n_buttons = skills.length
+          skills.forEach(skill => {
+          const button = document.createElement("button");
+          button.textContent = skill;  
+          button.setAttribute("id", `btn btn-primary`); 
+          button.setAttribute("style", `width: 300px;height: 100px; margin-top:100px; margin-left: 100px;`); 
+          container.appendChild(button);
+          // button.addEventListener("click", () => {
+            // console.log(`Botón ${item.id} presionado: ${item.nombre}`);
+        });
+      });
+}});
 </script>
 
   <!-- Main JS File -->
