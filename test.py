@@ -13,14 +13,9 @@ key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 
-
-
 # Realizar una consulta
-response = (
-    supabase.table("us")
-    .select("*")
-    .execute()
-)
+response = supabase.rpc("obtener_empleados_con_skill", {"p_skill_id": 8}).execute()
+print(response)
 
-# Imprimir la respuesta
+response = supabase.rpc("obtener_primer_filtro").execute()
 print(response)
