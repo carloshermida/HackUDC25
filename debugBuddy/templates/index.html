@@ -84,8 +84,6 @@
                     // Limpiar las opciones del segundo combobox
                     const subcatComboBox = document.getElementById('subcatcb');
                     subcatComboBox.innerHTML = ''
-                    // subcatComboBox.innerHTML = '<option value="" selected>Seleccione una especialidad</option>';
-
                     // Agregar las nuevas opciones de subcategorías
                     subcategories.forEach(subcat => {
                         const optionElement = document.createElement('option');
@@ -106,14 +104,15 @@
       const subcatId = this.value // Id de la subcategoria
       if (subcatId){
         const container = document.getElementById("skills_container");
-        const url = `/get_issues`
+        container.innerHTML = ''
+        const url = `/get_issues/${subcatId}`
         fetch(url).
         then(response => response.json()).
         then(skills => {
           const n_buttons = skills.length
           skills.forEach(skill => {
           const button = document.createElement("button");
-          button.textContent = skill;  
+          button.textContent = skill[1];  
           button.setAttribute("id", `btn btn-primary`); 
           button.setAttribute("style", `width: 300px;height: 100px; margin-top:100px; margin-left: 100px;`); 
           container.appendChild(button);

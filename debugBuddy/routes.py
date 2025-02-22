@@ -40,11 +40,11 @@ def subcategories(category_id: str):
 
 @app.route("/get_issues/<string:subcat_id>")
 def skills(subcat_id: str):
-    response = dict(supabase.rpc("search_skills", {"p_subcat": subcat_id}))
+    response = dict(supabase.rpc("search_skills", {"p_query": '', "p_subcat": subcat_id}).execute())
     issues = []
     for issue in response["data"]:
         issues.append((issue["id"], issue["name"]))
-    return [f"skill_{i}" for i in range(3)]
+    return issues
 
 @app.route("/contact/")
 def contact():
