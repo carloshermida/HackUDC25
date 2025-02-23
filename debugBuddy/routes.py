@@ -70,3 +70,23 @@ def employee_info(id_emp:str):
     info_emp = dict(supabase.rpc("get_employee", {"p_employee_id": id_emp}).execute())["data"][0]
     info_emp["location"] = [float(coord) for coord in info_emp["location"].split(",")]
     return render_template("employee.html", info_emp=info_emp)
+
+@app.route("/create_skill", methods=["POST"])
+def create_skill():
+    # Extraer datos del JSON enviado en la solicitud POST
+    data = request.get_json()
+    name = data.get("name")
+    description = data.get("description")
+    documentation = data.get("documentation")
+    
+    # Llamada a la función RPC en Supabase para insertar la nueva skill
+    result = supabase.rpc(
+        "create_skill",
+        {
+            "p_name": name,
+            "p_description": description,
+            "p_documentation": documentation
+        }
+    ).execute()
+    return 0
+

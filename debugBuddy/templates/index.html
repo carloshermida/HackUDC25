@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Skills Explorer</title>
+  <title>debugBuddy</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts -->
@@ -104,6 +104,42 @@
 
   </main>
 
+  <!-- Botón flotante para crear nueva skill -->
+  <button type="button" class="btn btn-primary rounded-circle" 
+          style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; z-index: 1050;"
+          data-bs-toggle="modal" data-bs-target="#newSkillModal">
+    +
+  </button>
+
+  <!-- Modal para el formulario de nueva skill -->
+  <div class="modal fade" id="newSkillModal" tabindex="-1" aria-labelledby="newSkillModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newSkillModalLabel">Solicitar Nueva Skill</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="newSkillForm">
+            <div class="mb-3">
+              <label for="skillName" class="form-label">Nombre de la Skill</label>
+              <input type="text" class="form-control" id="skillName" required>
+            </div>
+            <div class="mb-3">
+              <label for="skillDescription" class="form-label">Descripción</label>
+              <textarea class="form-control" id="skillDescription" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="skillDocumentation" class="form-label">Enlace a la documentación</label>
+              <textarea class="form-control" id="skillDocumentation" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Skill</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Funcionalidad para filtros -->
@@ -146,6 +182,39 @@
       document.querySelectorAll('#skills_container .card').forEach(card => {
         card.parentElement.style.display = card.textContent.toLowerCase().includes(filter) ? '' : 'none';
       });
+    });
+
+// Manejo del formulario de nueva skill
+    document.getElementById('newSkillForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Recoger datos del formulario
+      const name = document.getElementById('skillName').value;
+      const description = document.getElementById('skillDescription').value;
+      const documentation = document.getElementById('skillDocumentation').value;
+      
+      // Llamada POST al endpoint que invoca la función create_skill en Supabase
+      fetch('/create_skill', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          documentation
+        })
+      })
+      .then(response => {
+          // Recargar la lista de skills tras la inserción
+          fetchCards("/get_issues");
+          // Cerrar el modal
+          const modalElement = document.getElementById('newSkillModal');
+          const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+          modal.hide();
+          // Reiniciar el formulario
+          this.reset();
+       
+      })
     });
   </script>
 </body>
