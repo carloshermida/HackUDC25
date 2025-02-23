@@ -1,6 +1,42 @@
-# Reto de Gradiant: Sistema de registro y consulta de competencias técnicas personales
+# Reto de Gradiant
+# Sistema de registro y consulta de competencias técnicas personales
 
-<img src = "images/logo.jpeg" width = 300 height = 200>
+<img src = "images/logo.jpeg" width = 300 height = 250>
 
 
-Encontrar personal de la organización que cuente con habilidades que permitan ayudar a resolver una tarea en concreto o para la organización de un proyecto.
+La expansión de la empresa como Gradiant, ha supuesto un crecimiento significativo en el número de empleados de la empresa. Esto trae como consecuencia que la empleados o directios no sean capaces de saber a qué personal deben recurrir, invirtiendo una gran cantidad de tiempo en investigar esta información e intentando capacitar a sus empleados cuando en la realidad ya los posee.
+
+El problema descrito anteriormente es que se busca solucionar a partir de esta interfaz web, que se basa en un buscador de empleados cualificados, ya sea para el uso de una tecnología particular. Esta información resulta valiosa para que un directivo sepa a quién contactar para un cierto proyecto y así conseguir el máximo rendimiento. Asimismo, estos empleados pueden de ser gran ayuda para asesorar a aquellos que no cuentan con la experiencia suficiente, ayudando así a Vagrant a ser una organización. con trabajadores que están en la vanguardia en la industria tech.
+
+## <u>DESAROLLO</u>
+
+
+#### SISTEMA DE BASE DE DATOS RELACIONAL
+Creación del sistema de base de datos relacional para la extracción de información de las skills, qué empleados tienen experiencia con estas y cómo la han conseguido, ya se a través de cursos, proyectos personales o de la empresa. Además, para registrar su información de contacto que permite a cualquier empleado de Vagrant poder comunicarse con él mediante correro o teléfono. Para ello, se utilizo la herramienta de la nube Supabase, que pemitió el trabajo colaborativo para el desarrollo de las relaciones. También, se definieron queries pre-fabricadas para automatizar la recopilación de información. 
+
+
+
+#### DESAROLLO WEB
+
+Después del desarrollo de la lógica subyacente para la extracción de la información. A partir del framework Flask de Python para la creación de APIs que permitan la transferencia de información del back-end al fronted, así como para definir las URLs principales del sitio web. También, se utilizó el lenguaje de marcas y de diseño HTML y CSS, así como JS para añadir interacción. El principal objetivo para el diseño de esta interfaz web es que cualquier directivo de Gradiant pueda ver las destrezas más importantes que se utilizan en la compañía y a quién/es puede/n recurrir, de una manera fácil y sencilla. 
+
+Un aspecto novedoso en esta etapa del proyecto fue la implementación del modelo DeepSeek de 6.7B de parámetros para la generación de la descripciones de las destrezas. De esta manera, no se almacena este atributo en la relación y se tiene una descrićión precisa y actualizada en un párrafo de a lo sumo 300 palabras. 
+
+Finalmente, para las decisiones relacionadas al front-end se escogieron colores asociados al logo de Gradiant, ya que cómo se mencionó que en la presentación del reto, este representa un producto que la compañía realmente necesita. Por ello, se consideró oportuno crear esta interfaz web como si fuese propia de la organización.
+
+A continuación, se presenta las pestañas diseñadas:
+
+1. Menú principal:
+
+<img alt = "menu" width = 300 height = 250>
+
+2. Descripción de una destreaza:
+
+<img alt = "skill" width = 300 height = 250>
+
+
+3. Información de contacto:
+
+<img alt = "skill" width = 300 height = 250>
+
+---
