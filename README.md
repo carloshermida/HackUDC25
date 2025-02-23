@@ -6,13 +6,13 @@
 
 La expansión de la empresa como Gradiant, ha supuesto un crecimiento significativo en el número de empleados de la empresa. Esto trae como consecuencia que la empleados o directios no sean capaces de saber a qué personal deben recurrir, invirtiendo una gran cantidad de tiempo en investigar esta información e intentando capacitar a sus empleados cuando en la realidad ya los posee.
 
-El problema descrito anteriormente es que se busca solucionar a partir de esta interfaz web, que se basa en un buscador de empleados cualificados, ya sea para el uso de una tecnología particular. Esta información resulta valiosa para que un directivo sepa a quién contactar para un cierto proyecto y así conseguir el máximo rendimiento. Asimismo, estos empleados pueden de ser gran ayuda para asesorar a aquellos que no cuentan con la experiencia suficiente, ayudando así a Vagrant a ser una organización. con trabajadores que están en la vanguardia en la industria tech.
+El problema descrito anteriormente es que se busca solucionar a partir de esta interfaz web, que se basa en un buscador de empleados cualificados, ya sea para el uso de una tecnología particular. Esta información resulta valiosa para que un directivo sepa a quién contactar para un cierto proyecto y así conseguir el máximo rendimiento. Asimismo, estos empleados pueden de ser gran ayuda para asesorar a aquellos que no cuentan con la experiencia suficiente, ayudando así a Gradiant a ser una organización con trabajadores que están en la vanguardia en la industria tech.
 
 ## <u>DESAROLLO</u>
 
 
 #### SISTEMA DE BASE DE DATOS RELACIONAL
-Creación del sistema de base de datos relacional para la extracción de información de las skills, qué empleados tienen experiencia con estas y cómo la han conseguido, ya se a través de cursos, proyectos personales o de la empresa. Además, para registrar su información de contacto que permite a cualquier empleado de Vagrant poder comunicarse con él mediante correro o teléfono. Para ello, se utilizo la herramienta de la nube Supabase, que pemitió el trabajo colaborativo para el desarrollo de las relaciones. También, se definieron queries pre-fabricadas para automatizar la recopilación de información. 
+Creación del sistema de base de datos relacional para la extracción de información de las skills, qué empleados tienen experiencia con estas y cómo la han conseguido, ya se a través de cursos, proyectos personales o de la empresa. Además, para registrar su información de contacto que permite a cualquier empleado de Gradiant poder comunicarse con él mediante correro o teléfono. Para ello, se utilizo la herramienta de la nube Supabase, que pemitió el trabajo colaborativo para el desarrollo de las relaciones. También, se definieron queries pre-fabricadas para automatizar la recopilación de información. 
 
 <img alt = "supabase" width = 600 src = 'images/supabase.png'>
 
