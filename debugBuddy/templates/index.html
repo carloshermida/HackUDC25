@@ -66,10 +66,15 @@
               card.className = "card h-100";
               const cardBody = document.createElement("div");
               cardBody.className = "card-body d-flex align-items-center justify-content-center";
-              const title = document.createElement("h5");
-              title.className = "card-title text-center";
-              title.textContent = skill[1];
-              cardBody.appendChild(title);
+              const button = document.createElement("button");
+              button.className = "btn btn-primary";
+              button.textContent = skill[1];  
+              button.dataset.skillId = skill[0]; 
+              button.addEventListener("click", () => {
+                    window.location.href = `/skill/${button.dataset.skillId}`;
+                });
+
+              cardBody.appendChild(button);
               card.appendChild(cardBody);
               col.appendChild(card);
               container.appendChild(col);
@@ -125,10 +130,16 @@
               card.className = "card h-100";
               const cardBody = document.createElement("div");
               cardBody.className = "card-body d-flex align-items-center justify-content-center";
-              const title = document.createElement("h5");
-              title.className = "card-title text-center";
-              title.textContent = skill[1];
-              cardBody.appendChild(title);
+              // Create a button instead of just a title
+              const button = document.createElement("button");
+              button.className = "btn btn-primary";
+              button.textContent = skill[1];  
+              button.dataset.skillId = skill[0]; 
+              button.addEventListener("click", () => {
+                    window.location.href(`/skill/${button.dataset.skillId}`);
+                });
+
+              cardBody.appendChild(button);
               card.appendChild(cardBody);
               col.appendChild(card);
               container.appendChild(col);

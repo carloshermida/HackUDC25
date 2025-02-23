@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
 import os
 from dotenv import load_dotenv
+import platform
 from supabase import create_client, Client
+import requests
 
 
 # Build app object
@@ -17,6 +19,7 @@ key: str = os.environ.get("SUPABASE_KEY")
 # Crear el cliente de Supabase
 supabase: Client = create_client(url, key)
 
+@app.route("/index.html")
 @app.route("/")
 def home():
     """
@@ -36,7 +39,6 @@ def subcategories(category_id: str):
         subcategories.append((subcat["id"],subcat["name"].title()))
     return subcategories
 
-
 @app.route("/get_issues")
 def skills():
     skill_id = request.args.get("p_subcat", default="all")
@@ -50,6 +52,11 @@ def skills():
         issues.append((issue["id"], issue["name"]))
     return issues
 
-@app.route("/contact/")
-def contact():
-    return render_template("contact.html")
+@app.route("/skill/<int:skill_id>")
+def skill_description(skill_id:str):
+    info_skill = dict(supabase.rpc("get_skill", {"p_skill_id": skill_id}).execute())["data"][0]
+    qualified_people = dict(supabase.rpc("get_skill_employees", {"p_skill_id": skill_id}).execute())
+    emp_info = []
+    for emp in qualified_people["data"]:
+        emp_info.append((emp["id_employee"], emp["name_employee"]))
+    return render_template("skill.html", info_skill = info_skill)

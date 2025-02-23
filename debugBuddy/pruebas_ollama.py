@@ -23,8 +23,6 @@ def obtein_OS():
 
 #@app.route('/deepseek/<string:skill>')
 def skill_descripcion(skill):
-
-
     url = 'http://localhost:11434/api/chat'
 
     data = {
@@ -132,5 +130,5 @@ def basic_info(skill):
     response = requests.post(url, json=data)
     return response.json()
 
-print(basic_info('Numpy')['message']['content'])
+# print(basic_info('Numpy')['message']['content'])
 
