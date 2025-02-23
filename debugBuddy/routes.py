@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 import platform
 from supabase import create_client, Client
-import requests
+
 
 
 # Build app object
@@ -48,9 +48,9 @@ def skills():
     if skill_id != "all":
         response = dict(supabase.rpc("search_skills", {"p_query": p_query, "p_subcat": skill_id}).execute())
     else:
-        response = dict(supabase.table("skill").select("id", "name").execute())
+        response = dict(supabase.table("skill").select("id", "name", "description").execute())
     for issue in response["data"]:
-        issues.append((issue["id"], issue["name"]))
+        issues.append((issue["id"], issue["name"], issue["description"]))
     return issues
 
 @app.route("/skill/<int:skill_id>")
