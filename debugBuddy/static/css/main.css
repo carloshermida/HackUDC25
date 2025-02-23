@@ -1,19 +1,34 @@
 body {
-  background-color: #f8f9fa;
+  background-color: #282828;
   font-family: 'Inter', sans-serif;
 }
 header {
-  background: #fff;
+  background: #121212;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+
+
 .logo {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
 }
+.gradiant{
+  
+  height: 50px;
+    
+}
 .search-bar input {
   border-radius: 30px;
+  background: #ffffff;
+  border: #ef0303;
+  
+}
+.search-bar:focus {
+  background-color: #666666; /* Color de fondo al escribir */
+  border: 1px solid #007bff; /* Cambia el borde para resaltar */
 }
 .card {
   display: flex;
