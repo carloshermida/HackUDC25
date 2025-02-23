@@ -60,4 +60,4 @@ def skill_description(skill_id:str):
     emp_info = []
     for emp in qualified_people["data"]:
         emp_info.append((emp["id_employee"], emp["name_employee"]))
-    return render_template("skill.html", info_skill = info_skill)
+    return render_template("skill.html", info_skill = info_skill, emp_info = emp_info)

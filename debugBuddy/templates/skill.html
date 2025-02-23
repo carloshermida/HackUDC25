@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalle de la Tecnología</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Estilos personalizados mínimos -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .search-bar input {
+      border-radius: 30px;
+    }
+    /* Estilo para la lista de usuarios con scroll */
+    .user-list {
+      max-height: 70vh; /* Ajusta según tu preferencia */
+      overflow-y: auto;
+    }
+    .user-item img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    /* Línea vertical divisoria */
+    .vertical-divider {
+      width: 1px;
+      background-color: #ddd;
+      margin: auto;
+      height: 50%; /* Solo ocupa la mitad de la columna */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (igual que en index.html, modifícalo si necesitas) -->
+  <header class="py-3 sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="../templates/index.html" class="d-flex align-items-center text-decoration-none">
+        <img src="../static/img/logo.jpeg" alt="Logo" class="logo me-2" />
+        <span class="h5 m-0">Skills Explorer</span>
+      </a>
+      <div class="flex-grow-1 mx-3 search-bar">
+        <input
+          type="search"
+          id="searchInput"
+          class="form-control"
+          placeholder="Buscar..."
+        />
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container mt-5 pt-5">
+    <div class="row">
+      <!-- COLUMNA IZQUIERDA: DETALLES DE LA TECNOLOGÍA -->
+      <div class="col-md-8">
+        <h1 id = "{{info_skill.id}}" >{{info_skill.name}}</h1>
+        <p class="description">{{info_skill.description}}</p>
+        
+        <!-- Enlaces de interés -->
+        <h2 class="h5 mt-4">Enlaces de Interés</h2>
+        <ul>
+          <li><a href="#">Documentación oficial</a></li>
+          <li><a href="#">Comunidad de usuarios</a></li>
+          <li><a href="#">GitHub - Repositorio de ejemplo</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMNA CENTRAL: LÍNEA VERTICAL -->
+      <div class="col-md-1 d-flex">
+        <div class="vertical-divider"></div>
+      </div>
+
+      <!-- COLUMNA DERECHA: LISTA DE USUARIOS SCROLLABLE -->
+      <div class="col-md-3 user-list">
+        <ul class="list-unstyled">
+          {% for emp in emp_info %}
+          <!-- Ejemplo de usuario -->
+          <li class="d-flex align-items-center mb-3 user-item" id = "{{emp[0]}}">
+            <img
+              src="https://via.placeholder.com/40"
+              alt="Avatar"
+              class="me-2"
+            />
+            <span>{{emp[1]}}</span>
+          </li>
+          {% endfor %}
+          <!-- Añade más usuarios dinámicamente según tu base de datos -->
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap Bundle JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+</body>
+</html>

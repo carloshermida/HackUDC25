@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalle de Usuario</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin=""/>
+  <!-- Estilos personalizados -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .search-bar input {
+      border-radius: 30px;
+    }
+    /* Imagen de perfil circular y grande */
+    .profile-img {
+      width: 100%;
+      max-width: 350px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: auto;
+      display: block;
+    }
+    /* Estilos para botones de contacto */
+    .contact-btn {
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .contact-btn:hover {
+      background-color: #e2e6ea;
+    }
+    /* Mapa con borde para destacarlo */
+    #mapid {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (puedes adaptar o quitar este header) -->
+  <header class="py-3 sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="d-flex align-items-center text-decoration-none">
+        <img src="../static/img/logo.jpeg" alt="Logo" class="logo me-2" />
+        <span class="h5 m-0">Skills Explorer</span>
+      </a>
+      <div class="flex-grow-1 mx-3 search-bar">
+        <input type="search" id="searchInput" class="form-control" placeholder="Buscar..." />
+      </div>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Consultoría</a></li>
+              <li><a class="dropdown-item" href="#">Desarrollo</a></li>
+              <li><a class="dropdown-item" href="#">Marketing</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Acerca de</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Quiénes somos</a></li>
+              <li><a class="dropdown-item" href="#">Contacto</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container mt-5 pt-5">
+    <div class="row">
+      <!-- Columna Izquierda: Imagen de Perfil en Grande -->
+      <div class="col-md-5 mb-4 d-flex align-items-center justify-content-center">
+        <img src="https://via.placeholder.com/350?text=Usuario" alt="Foto de perfil" class="profile-img" />
+      </div>
+
+      <!-- Columna Derecha: Datos de Usuario + Mapa -->
+      <div class="col-md-7">
+        <h1 class="display-5">Pepe González</h1>
+        <p class="fs-5">Desarrollador Senior</p>
+
+        <!-- Botones de contacto: Email y Telegram -->
+        <div class="d-flex mb-4">
+          <!-- Al pulsar, abre el cliente de correo con mensaje predeterminado -->
+          <a class="btn btn-outline-primary contact-btn me-2" href="mailto:pepe@example.com?subject=Ayuda%20necesaria&body=Hola,%20necesito%20ayuda%20con%20mi%20proyecto.">
+            <i class="bi bi-envelope"></i> pepe@example.com
+          </a>
+          <!-- Al pulsar, abre Telegram con mensaje predeterminado -->
+          <a class="btn btn-outline-primary contact-btn" target="_blank" href="https://t.me/share/url?url=&text=Hola,%20necesito%20ayuda%20con%20mi%20proyecto.">
+            <i class="bi bi-telephone"></i> +34 600 000 000
+          </a>
+        </div>
+
+        <!-- Mapa con Leaflet -->
+        <div id="mapid"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+  <!-- Inicialización del mapa en DOMContentLoaded -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const lat = 40.4168;
+      const lon = -3.7038;
+      const zoomLevel = 13;
+
+      // Inicializar el mapa
+      const map = L.map('mapid').setView([lat, lon], zoomLevel);
+
+      // Capa base de CartoDB
+      const cartoLayer = new L.TileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png');
+      cartoLayer.addTo(map);
+
+      // Agregar un marcador en la ubicación
+      L.marker([lat, lon]).addTo(map);
+    });
+  </script>
+</body>
+</html>
