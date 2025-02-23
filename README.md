@@ -14,6 +14,7 @@ El problema descrito anteriormente es que se busca solucionar a partir de esta i
 #### SISTEMA DE BASE DE DATOS RELACIONAL
 Creación del sistema de base de datos relacional para la extracción de información de las skills, qué empleados tienen experiencia con estas y cómo la han conseguido, ya se a través de cursos, proyectos personales o de la empresa. Además, para registrar su información de contacto que permite a cualquier empleado de Vagrant poder comunicarse con él mediante correro o teléfono. Para ello, se utilizo la herramienta de la nube Supabase, que pemitió el trabajo colaborativo para el desarrollo de las relaciones. También, se definieron queries pre-fabricadas para automatizar la recopilación de información. 
 
+<img alt = "supabase" width = 600 scr = 'images/supabase.png'>
 
 
 #### DESAROLLO WEB
@@ -28,16 +29,16 @@ A continuación, se presenta las pestañas diseñadas:
 
 1. Menú principal:
 
-<img alt = "menu" width = 300 height = 250>
+<img alt = "menu" width = 600 scr = 'images/menu.png'>
 
 2. Descripción de una destreaza:
 
-<img alt = "skill" width = 300 height = 250>
+<img alt = "skill" width = 600 scr = 'images/skill.png'>
 
 
 3. Información de contacto:
 
-<img alt = "skill" width = 300 height = 250>
+<img alt = "contact" width = 600 scr = 'images/contact.png'>
 
 
 ## <u>Librerías principales</u>
