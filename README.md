@@ -67,6 +67,34 @@ A continuación, se presenta las pestañas diseñadas:
   </tr>
 </table> 
 
+---
+
+## <u>Licencias</u>
+
+ <table>
+  <tr>
+    <th>Nombre</th>
+    <th>Versión</th>
+    <th>Licencia</th>
+  </tr>
+  <tr>
+    <td>Bootstrap</td>
+    <td>5.3.0</td>
+    <td>MIT</td>
+  </tr>
+  <tr>
+    <td>Flask</td>
+    <td>3.1.0</td>
+    <td>BSD-3-Clause</td>
+
+  </tr>
+  <tr>
+    <td>Supabase</td>
+    <td>2.13.0</td>
+    <td>Apache License 2.0</td>
+  </tr>
+</table> 
+
 ```bash
 # Instalación en consola
 python3 -m venv venv
