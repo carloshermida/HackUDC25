@@ -39,4 +39,38 @@ A continuación, se presenta las pestañas diseñadas:
 
 <img alt = "skill" width = 300 height = 250>
 
----
+
+## <u>Librerías principales</u>
+
+ <table>
+  <tr>
+    <th>Nombre</th>
+    <th>Versión</th>
+    <th>Propósito</th>
+  </tr>
+  <tr>
+    <td>Python-dotenv</td>
+    <td>1.0.1</td>
+    <td>Exportar variables de entorno</td>
+  </tr>
+  <tr>
+    <td>Flask</td>
+    <td>3.1.0</td>
+    <td>Gestión del sitio web</td>
+
+  </tr>
+  <tr>
+    <td>Supabase</td>
+    <td>2.13.0</td>
+    <td>Base de datos en la nube</td>
+  </tr>
+</table> 
+
+```bash
+# Instalación en consola
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install python-dotenv flask supabase
+```
