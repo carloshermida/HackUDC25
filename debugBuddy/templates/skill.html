@@ -5,20 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>skill</title>
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../static/css/skill.css">
 </head>
 <body>
-
-  <!-- HEADER (igual que en index.html, modifícalo si necesitas) -->
+  <!-- HEADER -->
   <header class="py-3 sticky-top">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="../templates/index.html" class="d-flex align-items-center text-decoration-none">
@@ -34,8 +27,11 @@
     <div class="row">
       <!-- COLUMNA IZQUIERDA: DETALLES DE LA TECNOLOGÍA -->
       <div class="col-md-8">
-        <h1 id = "{{info_skill.id}}" >{{info_skill.name}}</h1>
+        <h1 id="{{info_skill.id}}">{{info_skill.name}}</h1>
         <p class="description">{{info_skill.description}}</p>
+        
+        <!-- Div para mostrar el tutorial devuelto por la API -->
+        <div id="tutorialOutput" class="mt-4"></div>
         
         <!-- Enlaces de interés -->
         <h2 class="h5 mt-4">Enlaces de Interés</h2>
@@ -43,34 +39,72 @@
           <li><a href="{{info_skill.documentation}}">Documentación</a></li>
         </ul>
       </div>
-
       <!-- COLUMNA CENTRAL: LÍNEA VERTICAL -->
       <div class="col-md-1 d-flex">
         <div class="vertical-divider"></div>
       </div>
-
       <!-- COLUMNA DERECHA: LISTA DE USUARIOS SCROLLABLE -->
       <div class="col-md-3 user-list">
         <h4 style="margin-bottom: 30px;">Contacta con un experto:</h4>
-          {% for emp in emp_info %}
+        {% for emp in emp_info %}
           <div style="margin-bottom: 30px;">
-          <img
-              src="https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png"
-              alt="Avatar"
-              class="logo me-2"
-            >
-          <button id = "{{emp[0]}}" onclick="window.location.href='/employee/{{emp[0]}}'">{{emp[1]}}</button>
-          <!-- Ejemplo de usuario -->
-        </div>
-          {% endfor %}
-          <!-- Añade más usuarios dinámicamente según tu base de datos -->
+            <img src="https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png" alt="Avatar" class="logo me-2">
+            <button id="{{emp[0]}}" onclick="window.location.href='/employee/{{emp[0]}}'">{{emp[1]}}</button>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </main>
 
   <!-- Bootstrap Bundle JS -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Script que hace la petición a la API y muestra solo el contenido del mensaje -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var skill = "{{info_skill.name}}";  // Se espera que el nombre venga del template
+      var url = "http://localhost:11434/api/chat";
+
+      // Mostrar spinner de carga
+      var outputDiv = document.getElementById('tutorialOutput');
+      outputDiv.innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div>';
+
+      // Prompt mejorado para la aplicación web:
+      var data = {
+        model: "deepseek-coder:6.7b",
+        messages: [
+          {
+            role: "user",
+            content: "Describe en un párrafo de como máximo 200 caracteres que es y que hace esta herramienta: " + skill
+          }
+        ],
+        stream: false
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Error en la petición: " + response.statusText);
+        }
+        return response.json();
+      })
+      .then(result => {
+        var outputDiv = document.getElementById('tutorialOutput');
+        // Mostrar solo el contenido del mensaje
+        if (result && result.message && result.message.content) {
+          outputDiv.innerHTML = result.message.content;
+        } else {
+          outputDiv.innerText = "No se recibió respuesta válida.";
+        }
+      })
+      .catch(error => {
+        document.getElementById('tutorialOutput').innerText = "Error: " + error.message;
+      });
+    });
+  </script>
 </body>
 </html>
