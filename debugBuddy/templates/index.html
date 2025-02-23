@@ -18,7 +18,7 @@
     <div class="container d-flex align-items-center justify-content-between">
       <a href="index.html" class="d-flex align-items-center text-decoration-none">
         <img src="../static/img/logo.jpeg" alt="Logo" class="logo me-2">
-        <span class="h5 m-0">DebugBuddy</span>
+        <span class="h5 m-0" style="color: #ffffff;">debugBuddy</span>
       </a>
       <div class="flex-grow-1 mx-3 search-bar">
         <input type="search" id="searchInput" class="form-control" placeholder="Buscar skills...">
@@ -29,10 +29,10 @@
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="container mt-5 pt-5">
+  <main class="container pt-3">
     <!-- Filtros: Categoría y Especialidad -->
     <div class="row mb-4">
-      <div class="col-md-6">
+      <div class="col-md-3">
         <label for="categorycb" class="form-label">Categoría</label>
         <select id="categorycb" class="form-select">
           <option value="" selected>Seleccione categoría</option>
@@ -41,7 +41,7 @@
           {% endfor %}
         </select>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <label for="subcatcb" class="form-label">Especialidad</label>
         <select id="subcatcb" class="form-select">
           <option value="" selected>Seleccione especialidad</option>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- Contenedor de Cards de Skills -->
-    <div id="skills_container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div id="skills_container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4">
       <!-- Aquí se inyectarán dinámicamente las cards de skills -->
     </div>
   

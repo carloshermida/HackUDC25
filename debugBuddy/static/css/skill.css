@@ -1,10 +1,11 @@
     body {
-      background-color: #f8f9fa;
+      background-color: #282828;
       font-family: 'Inter', sans-serif;
+      color: #ffffff;
     }
     header {
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: #121212;
+      box-shadow: 0 2px 4px rgba(173,9,9,0.834);
     }
     .logo {
       width: 50px;
@@ -12,6 +13,11 @@
       object-fit: cover;
       border-radius: 50%;
     }
+
+    .gradiant{
+      height: 50px;
+    }
+    
     .search-bar input {
       border-radius: 30px;
     }
