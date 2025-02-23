@@ -63,32 +63,10 @@
   <!-- HEADER (puedes adaptar o quitar este header) -->
   <header class="py-3 sticky-top">
     <div class="container d-flex align-items-center justify-content-between">
-      <a href="index.html" class="d-flex align-items-center text-decoration-none">
+      <a href="../templates/index.html" class="d-flex align-items-center text-decoration-none">
         <img src="../static/img/logo.jpeg" alt="Logo" class="logo me-2" />
-        <span class="h5 m-0">Skills Explorer</span>
+        <span class="h5 m-0">DebugBuddy</span>
       </a>
-      <div class="flex-grow-1 mx-3 search-bar">
-        <input type="search" id="searchInput" class="form-control" placeholder="Buscar..." />
-      </div>
-      <nav>
-        <ul class="nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Consultoría</a></li>
-              <li><a class="dropdown-item" href="#">Desarrollo</a></li>
-              <li><a class="dropdown-item" href="#">Marketing</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Acerca de</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Quiénes somos</a></li>
-              <li><a class="dropdown-item" href="#">Contacto</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
     </div>
   </header>
 
@@ -97,23 +75,23 @@
     <div class="row">
       <!-- Columna Izquierda: Imagen de Perfil en Grande -->
       <div class="col-md-5 mb-4 d-flex align-items-center justify-content-center">
-        <img src="https://via.placeholder.com/350?text=Usuario" alt="Foto de perfil" class="profile-img" />
+        <img src="https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png" alt="Foto de perfil" class="profile-img" />
       </div>
 
       <!-- Columna Derecha: Datos de Usuario + Mapa -->
       <div class="col-md-7">
-        <h1 class="display-5">Pepe González</h1>
-        <p class="fs-5">Desarrollador Senior</p>
+        <h1 class="display-5">{{info_emp.name}}</h1>
+        <p class="fs-5">{{info_emp.job_title}}</p>
 
         <!-- Botones de contacto: Email y Telegram -->
         <div class="d-flex mb-4">
           <!-- Al pulsar, abre el cliente de correo con mensaje predeterminado -->
           <a class="btn btn-outline-primary contact-btn me-2" href="mailto:pepe@example.com?subject=Ayuda%20necesaria&body=Hola,%20necesito%20ayuda%20con%20mi%20proyecto.">
-            <i class="bi bi-envelope"></i> pepe@example.com
+            <i class="bi bi-envelope"></i> {{info_emp.email}}
           </a>
           <!-- Al pulsar, abre Telegram con mensaje predeterminado -->
           <a class="btn btn-outline-primary contact-btn" target="_blank" href="https://t.me/share/url?url=&text=Hola,%20necesito%20ayuda%20con%20mi%20proyecto.">
-            <i class="bi bi-telephone"></i> +34 600 000 000
+            <i class="bi bi-telephone"></i> {{info_emp.phone}}
           </a>
         </div>
 
@@ -130,8 +108,8 @@
   <!-- Inicialización del mapa en DOMContentLoaded -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const lat = 40.4168;
-      const lon = -3.7038;
+      const lat = "{{info_emp.location[0]}}";
+      const lon = "{{info_emp.location[1]}}";
       const zoomLevel = 13;
 
       // Inicializar el mapa

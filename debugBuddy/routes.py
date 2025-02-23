@@ -53,11 +53,20 @@ def skills():
         issues.append((issue["id"], issue["name"], issue["description"]))
     return issues
 
-@app.route("/skill/<int:skill_id>")
+@app.route("/skill/<string:skill_id>")
 def skill_description(skill_id:str):
     info_skill = dict(supabase.rpc("get_skill", {"p_skill_id": skill_id}).execute())["data"][0]
+    # Get the documentation
+    info_skill["documentation"] = [doc.strip() for doc in info_skill["documentation"].split(",")][0]
     qualified_people = dict(supabase.rpc("get_skill_employees", {"p_skill_id": skill_id}).execute())
     emp_info = []
     for emp in qualified_people["data"]:
         emp_info.append((emp["id_employee"], emp["name_employee"]))
     return render_template("skill.html", info_skill = info_skill, emp_info = emp_info)
+
+
+@app.route("/employee/<string:id_emp>")
+def employee_info(id_emp:str):
+    info_emp = dict(supabase.rpc("get_employee", {"p_employee_id": id_emp}).execute())["data"][0]
+    info_emp["location"] = [float(coord) for coord in info_emp["location"].split(",")]
+    return render_template("employee.html", info_emp=info_emp)

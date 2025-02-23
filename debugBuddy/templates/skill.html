@@ -60,16 +60,8 @@
     <div class="container d-flex align-items-center justify-content-between">
       <a href="../templates/index.html" class="d-flex align-items-center text-decoration-none">
         <img src="../static/img/logo.jpeg" alt="Logo" class="logo me-2" />
-        <span class="h5 m-0">Skills Explorer</span>
+        <span class="h5 m-0">DebugBuddy</span>
       </a>
-      <div class="flex-grow-1 mx-3 search-bar">
-        <input
-          type="search"
-          id="searchInput"
-          class="form-control"
-          placeholder="Buscar..."
-        />
-      </div>
     </div>
   </header>
 
@@ -84,9 +76,7 @@
         <!-- Enlaces de interés -->
         <h2 class="h5 mt-4">Enlaces de Interés</h2>
         <ul>
-          <li><a href="#">Documentación oficial</a></li>
-          <li><a href="#">Comunidad de usuarios</a></li>
-          <li><a href="#">GitHub - Repositorio de ejemplo</a></li>
+          <li><a href="{{info_skill.documentation}}">Documentación</a></li>
         </ul>
       </div>
 
@@ -97,20 +87,19 @@
 
       <!-- COLUMNA DERECHA: LISTA DE USUARIOS SCROLLABLE -->
       <div class="col-md-3 user-list">
-        <ul class="list-unstyled">
+        <h4 style="margin-bottom: 30px;">Contacta con un experto:</h4>
           {% for emp in emp_info %}
-          <!-- Ejemplo de usuario -->
-          <li class="d-flex align-items-center mb-3 user-item" id = "{{emp[0]}}">
-            <img
-              src="https://via.placeholder.com/40"
+          <div style="margin-bottom: 30px;">
+          <img
+              src="https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png"
               alt="Avatar"
-              class="me-2"
-            />
-            <span>{{emp[1]}}</span>
-          </li>
+              class="logo me-2"
+            >
+          <button id = "{{emp[0]}}" onclick="window.location.href='/employee/{{emp[0]}}'">{{emp[1]}}</button>
+          <!-- Ejemplo de usuario -->
+        </div>
           {% endfor %}
           <!-- Añade más usuarios dinámicamente según tu base de datos -->
-        </ul>
       </div>
     </div>
   </main>
