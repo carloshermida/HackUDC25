@@ -1,0 +1,42 @@
+body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .search-bar input {
+      border-radius: 30px;
+    }
+    /* Imagen de perfil circular y grande */
+    .profile-img {
+      width: 100%;
+      max-width: 350px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: auto;
+      display: block;
+    }
+    /* Estilos para botones de contacto */
+    .contact-btn {
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .contact-btn:hover {
+      background-color: #e2e6ea;
+    }
+    /* Mapa con borde para destacarlo */
+    #mapid {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      height: 300px;
+    }

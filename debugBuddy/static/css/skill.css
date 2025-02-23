@@ -1,0 +1,36 @@
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .search-bar input {
+      border-radius: 30px;
+    }
+    /* Estilo para la lista de usuarios con scroll */
+    .user-list {
+      max-height: 70vh; /* Ajusta según tu preferencia */
+      overflow-y: auto;
+    }
+    .user-item img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    /* Línea vertical divisoria */
+    .vertical-divider {
+      width: 1px;
+      background-color: #ddd;
+      margin: auto;
+      height: 50%; /* Solo ocupa la mitad de la columna */
+    }
+
